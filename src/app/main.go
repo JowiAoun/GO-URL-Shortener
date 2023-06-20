@@ -1,18 +1,26 @@
 package main
 
 import (
-  "github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
-  // Create a new Fiber app
-  app := fiber.New()
+	// Constants
+	const (
+		PORT = ":3000"
+	)
 
-  // Define a route
-  app.Get("/", func(c *fiber.Ctx) error {
-    return c.SendString("Hello, World!")
-  })
+	// Set up app
+	app := fiber.New()
 
-  // Start the server
-  app.Listen(":3000")
+	// Define a route
+	app.Get("/", func(c *fiber.Ctx) error {
+		// Render the "index.html" template
+		return c.Render("../templates/home.html", fiber.Map{
+			"Name": "Jowi",
+		})
+	})
+
+	// Listen on the port
+	app.Listen(PORT)
 }
